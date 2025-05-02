@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Fact Checker</title>
+  <link rel="stylesheet" href="popup.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="confetti-container" aria-hidden="true"></div>
+  <div class="container">
+    <div class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="14" cy="14" r="14" fill="url(#paint0_linear)"/>
+            <path d="M8 14.5L12 18.5L20 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="paint0_linear" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#3b82f6"/>
+                <stop offset="1" stop-color="#2563eb"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <h1>Fact Checker</h1>
+        </div>
+        <label class="switch" title="Toggle dark/light mode">
+          <input type="checkbox" id="darkModeToggle" aria-label="Toggle dark mode">
+          <span class="slider">
+            <svg class="slider-icon light" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12"x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="slider-icon dark" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="action-section">
+        <button id="checkBtn" class="main-btn" aria-label="Check Highlighted Text">
+          <span class="btn-icon material-icons" aria-hidden="true">search</span>
+          <span class="btn-text">Check Highlighted Text</span>
+        </button>
+        <p class="instruction-text">Select text on any webpage and click to verify</p>
+      </div>
+
+      <div class="tabs-container">
+        <div class="tabs" role="tablist" aria-label="Result and Sources Tabs">
+          <button class="tab active" data-tab="resultTab" role="tab" aria-selected="true" aria-controls="resultTab">
+            <span class="material-icons" aria-hidden="true">fact_check</span>
+            <span>Result</span>
+          </button>
+          <button class="tab" data-tab="sourcesTab" role="tab" aria-selected="false" aria-controls="sourcesTab">
+            <span class="material-icons" aria-hidden="true">link</span>
+            <span>Sources</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <div id="loadingSpinner" class="loading-container" hidden>
+          <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+          </div>
+          <p class="loading-text">Analyzing content...</p>
+        </div>
+        <div id="resultTab" class="tab-content" role="tabpanel" aria-labelledby="resultTab">
+          <div id="result" class="result-card" hidden>
+            <div class="result-header">
+              <h2 class="factcheck-title">Fact Check Result</h2>
+              <button id="copyBtn" class="icon-btn" title="Copy result" aria-label="Copy result">
+                <span class="material-icons" aria-hidden="true">content_copy</span>
+              </button>
+            </div>
+            <div id="verdict-section" class="verdict-section">
+              <span id="verdict-icon" class="material-icons"></span>
+              <div id="verdict-text"></div>
+            </div>
+            <hr class="divider"/>
+            <div class="summary-section">
+              <h3 class="summary-title">EXPLANATION</h3>
+              <div class="summary markdown-body" id="summary"></div>
+              <button id="readMoreBtn" class="read-more-btn" hidden>Read more</button>
+            </div>
+          </div>
+
+          <div id="error" class="error-card" hidden role="alert">
+            <div class="error-icon">
+              <span class="material-icons" aria-hidden="true">error_outline</span>
+            </div>
+            <div class="error-content">
+              <div class="error-title">Something went wrong</div>
+              <div class="error-message"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sourcesTab" class="tab-content" hidden role="tabpanel" aria-labelledby="sourcesTab">
+          <div class="sources-header">
+            <span class="material-icons" aria-hidden="true">library_books</span>
+            <h3>Reference Sources</h3>
+          </div>
+          <div id="sourcesTabList" class="sources-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="marked.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
+
