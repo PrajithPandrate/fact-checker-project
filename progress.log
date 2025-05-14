@@ -46,3 +46,4 @@ Final review, code cleanup, and UX polish on 2025-06-12T09:50:00
 // fake change to mark progress 11
 Add backend Flask API skeleton and requirements
 Implement basic Chrome extension popup UI
+Integrate backend with extension, add fact-checking endpoint
