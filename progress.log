@@ -48,3 +48,4 @@ Add backend Flask API skeleton and requirements
 Implement basic Chrome extension popup UI
 Integrate backend with extension, add fact-checking endpoint
 Improve result card design and verdict badge
+Add dark mode toggle and theme support
