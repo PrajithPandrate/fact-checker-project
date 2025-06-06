@@ -51,3 +51,4 @@ Improve result card design and verdict badge
 Add dark mode toggle and theme support
 Enhance accessibility and ARIA labels
 Add confetti animation and micro-interactions
+Bug fixes, error handling, and loading spinner polish
